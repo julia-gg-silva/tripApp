@@ -48,8 +48,52 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
     ).showSnackBar(SnackBar(content: Text("Dados Salvos!")));
   }
 
+  void _cleanUserData() {
+    _nameController.clear();
+    _ageController.clear();
+    _tripController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(title: Text('Perfil Viajante')),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextField(
+              controller: _nameController,
+              decoration: InputDecoration(labelText: 'Nome:'),
+            ),
+            TextField(
+              controller: _ageController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(labelText: 'Idade'),
+            ),
+            TextField(
+              controller: _tripController,
+              decoration: InputDecoration(labelText: 'País Favorito:'),
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(onPressed: _saveUserData, child: Text('Salvar')),
+                ElevatedButton(
+                  onPressed: _loadUserData,
+                  child: Text('Carregar'),
+                ),
+                ElevatedButton(
+                  onPressed: _cleanUserData,
+                  child: Text('Limpar'),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
